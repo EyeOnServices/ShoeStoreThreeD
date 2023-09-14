@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      background: linear-gradient(to top, #f179bb, #fed6e9);
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .rectangle {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 580px;
+      height: 450px;
+      background: linear-gradient(to top left, #f179bb, #fed6e9);
+      border-radius: 0 0 580px 0;
+    }
+
+    .rectangle2 {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 580px;
+      height: 450px;
+      background: linear-gradient(to top right, #f179bb, #fed6e9);
+      border-radius: 0 0 0 580px;
+    }
+
+    .rectangle3 {
+      position: absolute;
+      bottom: 0;
+      width: 630px;
+      height: 400px;
+      background: #f179bb;
+      border-radius: 630px 630px 0 0;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0 auto;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="rectangle"></div>
+  <div class="rectangle2"></div>
+  <div class="rectangle3"></div>
+</body>
+
+</html>
