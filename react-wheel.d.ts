@@ -1,1 +1,1 @@
-declare module 'react-colour-wheel';
+// declare module 'react-colour-wheel';
