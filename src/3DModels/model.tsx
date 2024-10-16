@@ -33,6 +33,7 @@ const ProductModel2 = () => {
         <>
             {isSmallScreen && <StyledCanvas style={{ height: '100vh', width: '100vw', position: 'absolute', bottom: '-22rem', right: '-16rem' }} shadows={false} camera={{ position: [4, 0, -12], fov: 35 }} draggable={false}>  <ambientLight />
                 <Stage intensity={1} environment="city" adjustCamera={2.5} shadows={false} >
+                     <ambientLight />
                     <PivotPoint />
                 </Stage>
                 <OrbitControls makeDefault enablePan={false} />
