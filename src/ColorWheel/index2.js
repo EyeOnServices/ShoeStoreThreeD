@@ -1,79 +1,103 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import "./Wheel.css";
 import { setSelectedColor } from "../store/appSlice";
 
 const ColorWheel2 = () => {
   const [selected, setSelected] = useState(1);
-
   const dispatch = useDispatch();
-  let active = false;
-  let angle = 0;
-  let rotation = 0;
-  let startAngle = 0;
-  let center = { x: 0, y: 0 };
+
+  // Refs to hold mutable variables that persist across renders
+  const activeRef = useRef(false);
+  const angleRef = useRef(0);
+  const rotationRef = useRef(0);
+  const startAngleRef = useRef(0);
+  const centerRef = useRef({ x: 0, y: 0 });
+
   const R2D = 180 / Math.PI;
-  const rot = document.getElementById("main");
-  const init = useCallback(() => {
-    rot?.addEventListener("mousedown", start, false);
-    
-    document.addEventListener("mousemove", (event) => {
-      if (active === true) {
-        event.preventDefault();
-        rotate(event);
-      }
-    });
-    
-    document.addEventListener("mouseup", (event) => {
-      event.preventDefault();
-      stop();
-    });
-    
-    return () => {
-      rot?.removeEventListener("mousedown", start, false);
-      document.removeEventListener("mousemove", rotate);
-      document.removeEventListener("mouseup", stop);
-    };
-  }, [rot, active, start, rotate, stop]); // Include dependencies
-  
-  const start = (e) => {
+
+  // Ref for the main wheel element
+  const mainRef = useRef(null);
+
+  // Event handler for mousedown
+  const start = useCallback((e) => {
     e.preventDefault();
-    const bb = e.target.getBoundingClientRect();
+    if (!mainRef.current) return;
+
+    const bb = mainRef.current.getBoundingClientRect();
     const t = bb.top;
     const l = bb.left;
     const h = bb.height;
     const w = bb.width;
-    let x, y;
-    center = {
+
+    centerRef.current = {
       x: l + w / 2,
       y: t + h / 2,
     };
-    x = e.clientX - center.x;
-    y = e.clientY - center.y;
-    startAngle = R2D * Math.atan2(y, x);
-    return (active = true);
-  };
 
-  const rotate = (e) => {
+    const x = e.clientX - centerRef.current.x;
+    const y = e.clientY - centerRef.current.y;
+
+    startAngleRef.current = R2D * Math.atan2(y, x);
+    activeRef.current = true;
+  }, []);
+
+  // Event handler for mousemove
+  const rotate = useCallback((e) => {
+    if (!activeRef.current) return;
+
     e.preventDefault();
-    let x = e.clientX - center.x;
-    let y = e.clientY - center.y;
-    let d = R2D * Math.atan2(y, x);
-    rotation = d - startAngle;
-    if (rot) {
-      rot.style.webkitTransform = `rotate(${angle + rotation}deg)`;
-    }
-  };
 
-  const stop = () => {
-    angle += rotation;
-    return (active = false);
-  };
+    const x = e.clientX - centerRef.current.x;
+    const y = e.clientY - centerRef.current.y;
+    const d = R2D * Math.atan2(y, x);
+    rotationRef.current = d - startAngleRef.current;
+    const newAngle = angleRef.current + rotationRef.current;
+
+    if (mainRef.current) {
+      mainRef.current.style.transform = `rotate(${newAngle}deg)`;
+    }
+  }, []);
+
+  // Event handler for mouseup
+  const stop = useCallback(() => {
+    angleRef.current += rotationRef.current;
+    activeRef.current = false;
+  }, []);
+
+  // Initialize event listeners
+  const init = useCallback(() => {
+    const mainElement = mainRef.current;
+    if (!mainElement) return;
+
+    mainElement.addEventListener("mousedown", start, false);
+
+    const handleMouseMove = (event) => {
+      if (activeRef.current) {
+        rotate(event);
+      }
+    };
+
+    const handleMouseUp = (event) => {
+      stop();
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+
+    // Cleanup function to remove event listeners
+    return () => {
+      mainElement.removeEventListener("mousedown", start, false);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [start, rotate, stop]);
 
   useEffect(() => {
-    init();
+    const cleanup = init();
+    return cleanup;
   }, [init]);
 
   const handleColorChange = (selectedColor) => {
@@ -83,7 +107,7 @@ const ColorWheel2 = () => {
 
   return (
     <center>
-      <div className="main" id="main">
+      <div className="main" id="main" ref={mainRef}>
         <span
           className={`root color-0 ${selected === 1 ? "selected" : ""}`}
           onClick={() =>
