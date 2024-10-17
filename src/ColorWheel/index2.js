@@ -28,7 +28,7 @@ const ColorWheel2 = () => {
       event.preventDefault();
       stop();
     });
-  });
+  }, []);
 
   const start = (e) => {
     e.preventDefault();
