@@ -15,17 +15,17 @@ import ProductModel2 from './3DModels/model';
 import ColorWheel2 from './ColorWheel/index2';
 
 
-const jump = keyframes`
-  0% {
-    top: 0;
-  }
-  50% {
-    top: -20px;
-  }
-  100% {
-    top: 0;
-  }
-`;
+// const jump = keyframes`
+//   0% {
+//     top: 0;
+//   }
+//   50% {
+//     top: -20px;
+//   }
+//   100% {
+//     top: 0;
+//   }
+// `;
 
 
 
@@ -84,10 +84,10 @@ margin-top : 5px;
 const BackgroundController = lazy(() => import('./BackgroundController/index'));
 const ProductView = lazy(() => import('./3DProducts/index'));
 const USerModule = lazy(() => import('./UserModule/index'));
-const ColorWheel = lazy(() => import('./ColorWheel/index'));
+// const ColorWheel = lazy(() => import('./ColorWheel/index'));
 const ProductDesc = lazy(() => import('./PrductsDesc/index'));
 const Player = lazy(() => import('./AudioPlayer/index'));
-const ProductModel = lazy(() => import('./3DModels/index'));
+// const ProductModel = lazy(() => import('./3DModels/index'));
 
 
 
@@ -105,7 +105,7 @@ const App = () => {
   const selectedColor = useSelector((state: RootState) => state.app.selectedColor);
 
 
-  const [ProductsLeft, setProductsL] = useState<Product[]>([
+  const [ProductsLeft, ] = useState<Product[]>([
     {
       id: 1,
       name: 'ALVEA',
@@ -140,7 +140,7 @@ const App = () => {
     console.log(size, '>>> Selected Size')
   }
 
-  const yourDefaultColour = "rgb(255, 255, 255)";
+  // const yourDefaultColour = "rgb(255, 255, 255)";
 
   return (
     <>
@@ -208,12 +208,12 @@ const MainContainer = styled.div`
 position : relative;
 
 `
-const ThreeDContainer = styled.div`
- width:100%;
- background:orange;
- position:relative;
- margin-top:500px;
-`
+// const ThreeDContainer = styled.div`
+//  width:100%;
+//  background:orange;
+//  position:relative;
+//  margin-top:500px;
+// `
 
 const WheelContainer = styled.div`
 margin-top : -80px;

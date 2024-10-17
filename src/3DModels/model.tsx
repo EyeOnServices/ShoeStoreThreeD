@@ -2,7 +2,7 @@ import React from 'react';
 import { Model } from './QUARTZS';
 import { Canvas, useThree } from '@react-three/fiber';
 import { OrbitControls, Stage } from '@react-three/drei';
-import * as THREE from 'three';
+// import * as THREE from 'three';
 import styled from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 
@@ -20,7 +20,7 @@ const ProductModel2 = () => {
     const isLargeScreen = useMediaQuery({ minWidth: 1024 }); // styles for screens wider than 1023px
 
     const PivotPoint = () => {
-        const { viewport } = useThree();
+        // const { viewport } = useThree();
         return (
             <group position={[0, -6, 0]}>
                 {/* This is the position of the pivot point relative to the model */}

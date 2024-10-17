@@ -6,9 +6,9 @@ interface BackgroundControllerProps {
   children: ReactNode;
 }
 
-const ParentContainer = styled.div`
-  min-height: 100vh;
-`;
+// const ParentContainer = styled.div`
+//   min-height: 100vh;
+// `;
 
 const BackgroundContainer = styled.div<{ selectedColorhex: string, selectedColorsec: string }>`
   background-color: ${(props) => props.selectedColorhex};

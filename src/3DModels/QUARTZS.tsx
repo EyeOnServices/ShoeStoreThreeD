@@ -1,11 +1,11 @@
 import * as THREE from 'three'
-import React, { useEffect, useRef, useState } from 'react'
+import React, {useRef, useState } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store/store';
-import { useFrame, useLoader } from '@react-three/fiber'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { useFrame } from '@react-three/fiber'
+// import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 type GLTFResult = GLTF & {
   nodes: {
     SOLE_02: THREE.Mesh

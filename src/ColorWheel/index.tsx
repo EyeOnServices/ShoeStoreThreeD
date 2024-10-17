@@ -1,7 +1,7 @@
 import React, { MouseEventHandler, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FaLock } from 'react-icons/fa';
-import { IconType } from 'react-icons';
+// import { IconType } from 'react-icons';
 import { useDispatch } from 'react-redux';
 import { setSelectedColor } from '../store/appSlice';
 import { Color, Colors } from '../utils';
@@ -23,7 +23,7 @@ const ColorWheel = () => {
     const [radius, setRadius] = useState<number>(400);
     const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
     const angleBetweenContainers = 360 / Colors.length;
-    const initialAngle = -90; // initial angle for the first container
+    // const initialAngle = -90; // initial angle for the first container
 
     useEffect(() => {
         const handleResize = () => {

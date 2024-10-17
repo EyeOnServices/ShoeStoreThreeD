@@ -8,8 +8,8 @@ import { useMediaQuery } from 'react-responsive';
 
 function Controls() {
     const { gl: { domElement } } = useThree();
-    const width = 100;
-    const height = 100;
+    // const width = 100;
+    // const height = 100;
     const camera = new THREE.PerspectiveCamera(
         75,
         window.innerWidth / window.innerHeight,
