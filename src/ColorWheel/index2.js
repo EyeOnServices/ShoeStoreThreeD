@@ -18,18 +18,26 @@ const ColorWheel2 = () => {
   const rot = document.getElementById("main");
   const init = useCallback(() => {
     rot?.addEventListener("mousedown", start, false);
+    
     document.addEventListener("mousemove", (event) => {
       if (active === true) {
         event.preventDefault();
         rotate(event);
       }
     });
+    
     document.addEventListener("mouseup", (event) => {
       event.preventDefault();
       stop();
     });
-  }, []);
-
+    
+    return () => {
+      rot?.removeEventListener("mousedown", start, false);
+      document.removeEventListener("mousemove", rotate);
+      document.removeEventListener("mouseup", stop);
+    };
+  }, [rot, active, start, rotate, stop]); // Include dependencies
+  
   const start = (e) => {
     e.preventDefault();
     const bb = e.target.getBoundingClientRect();
