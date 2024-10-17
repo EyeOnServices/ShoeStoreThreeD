@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import 'swiper/css';

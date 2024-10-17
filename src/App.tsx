@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+
 import React, { useEffect, useState } from 'react';
 import shoe1 from './Product_Buttons/APATITE.png'
 import shoe2 from './Product_Buttons/CALCITE.png'
@@ -5,7 +8,7 @@ import shoe3 from './Product_Buttons/COPPER.png'
 import shoe4 from './Product_Buttons/CALCITE.png'
 import { Product } from './3DProducts';
 import user from './assets/user.png'
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { RootState } from './store/store';
 import Sizes from './ShoeSizes';

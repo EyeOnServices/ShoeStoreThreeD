@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import "./Wheel.css";
 import { setSelectedColor } from "../store/appSlice";
@@ -14,7 +16,7 @@ const ColorWheel2 = () => {
   let center = { x: 0, y: 0 };
   const R2D = 180 / Math.PI;
   const rot = document.getElementById("main");
-  const init = () => {
+  const init = useCallback(() => {
     rot?.addEventListener("mousedown", start, false);
     document.addEventListener("mousemove", (event) => {
       if (active === true) {
@@ -26,7 +28,7 @@ const ColorWheel2 = () => {
       event.preventDefault();
       stop();
     });
-  };
+  });
 
   const start = (e) => {
     e.preventDefault();
