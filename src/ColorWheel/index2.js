@@ -42,7 +42,7 @@ const ColorWheel2 = () => {
 
     startAngleRef.current = R2D * Math.atan2(y, x);
     activeRef.current = true;
-  }, []);
+  }, [R2D]);
 
   // Event handler for mousemove
   const rotate = useCallback((e) => {
@@ -59,7 +59,8 @@ const ColorWheel2 = () => {
     if (mainRef.current) {
       mainRef.current.style.transform = `rotate(${newAngle}deg)`;
     }
-  }, []);
+  },[R2D, startAngleRef, centerRef, rotationRef,
+  ]);
 
   // Event handler for mouseup
   const stop = useCallback(() => {
